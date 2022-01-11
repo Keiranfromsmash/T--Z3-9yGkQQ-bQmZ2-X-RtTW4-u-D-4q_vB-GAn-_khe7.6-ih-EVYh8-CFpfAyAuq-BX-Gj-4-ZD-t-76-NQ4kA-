@@ -1,13 +1,25 @@
-Options -Indexes
-
 RewriteEngine On
 RewriteBase /
 
-RewriteCond %{SERVER_PORT} 80 
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,NE,L]
+# Protect the htaccess file
+<Files .htaccess>
+Order Allow,Deny
+Deny from all
+</Files>
 
-RewriteRule ^404/?$$ error.html [L,NC]
+# Protect discord logo
+<Files ./discordicon.png>
+Order Allow,Deny
+Deny from all
+</Files>
 
-RewriteRule ^home/?$ index.php [L,NC]
+#protect script.js
+<Files ./script.js>
+Order Allow,Deny
+Deny from all
+</Files>
 
-RewriteRule p/(.*)$ msub.php?page=$1 [L,NC,QSA]
+
+
+# Disable directory browsing
+Options All -Indexes
